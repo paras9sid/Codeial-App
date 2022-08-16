@@ -10,8 +10,13 @@ const homeController = require('../controllers/home_controller');
 // console.log("Router Loaded");
 
 router.get('/',homeController.home);
-// router.use('/users',require('./users')); // for localhost:8001/users/profile
-router.use('/users',require('./users')); // for localhost:8001/profile
+router.use('/users',require('./users')); // for localhost:8001/users/profile
+// router.use('/',require('./users')); // for localhost:8001/profile
+
+
+// api router
+
+router.use('/api',require('./api'));
 
 
 

@@ -18,7 +18,7 @@ module.exports.profile = function(req,res){
             }
             if(user){
                 return res.render('profile',{
-                    title:"User Profile",
+                    // title:"User Profile",
                     user:user
                 });
 
@@ -33,6 +33,12 @@ module.exports.profile = function(req,res){
 
 //rendering sign up page
 module.exports.signUp = function(req,res){
+
+    if(req.isAuthenticated()){
+       return res.redirect('/users/profile');
+    }
+
+
     return res.render('user_signup',{
         title: "Codeial | Sign Up"
     });
@@ -40,6 +46,11 @@ module.exports.signUp = function(req,res){
 
 //rendering login page
 module.exports.login = function(req,res){
+
+    if(req.isAuthenticated()){
+       return res.redirect('/users/profile');
+    }
+
     return res.render('user_login',{
         title: "Codeial | Login"
     });
@@ -74,38 +85,52 @@ module.exports.create = function(req,res){
 
 //get login data session creation
 module.exports.createSession = function(req,res){
-    //find the user
-    User.findOne({email:req.body.email},function(err,user){
-        if(err){
-            console.log('Error signin in');
-            return;
-        }
+   
+//    //MANUAL AUTHENTICATION
+//     //find the user
+//     User.findOne({email:req.body.email},function(err,user){
+//         if(err){
+//             console.log('Error signin in');
+//             return;
+//         }
 
-        //handle user found
+//         //handle user found
         
-        if(user){
-            //handle password not match
-            if(user.password!= req.body.password){
-                return res.redirect('back');
-            }
+//         if(user){
+//             //handle password not match
+//             if(user.password!= req.body.password){
+//                 return res.redirect('back');
+//             }
 
-            //handle session created
-            res.cookie('user_id',user.id);
-            return res.redirect('/users/profile');
+//             //handle session created
+//             res.cookie('user_id',user.id);
+//             return res.redirect('/users/profile');
 
 
-        }else{
+//         }else{
 
-            //handle user not found
+//             //handle user not found
 
-            return res.redirect('back');
+//             return res.redirect('back');
 
-        }
-    });
+//         }
+//     });
 
     
 
   
+    // USING PASSPORT MIDDLEWARE AUTHENTICATION
+    return res.redirect('/');
 
 
 };
+
+module.exports.destroySession = function(req,res){ 
+    req.logout(function(err){
+        if(err){
+            console.log('Error in sugning out');
+        }
+    });  // inbuilt in passport.js
+    return res.redirect('/');
+
+}

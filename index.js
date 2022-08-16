@@ -9,7 +9,23 @@ const expressLayouts = require('express-ejs-layouts');
 //connection to db
 const db = require('./config/mongoose');
 
-app.use(express.urlencoded({extended:true})); //extended true for removing deprecateed warning
+//used for session cookie
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo');
+const sassMiddleware = require('node-sass-middleware');
+
+
+app.use(sassMiddleware({
+    src:'./assets/scss',
+    dest:'./assets/css',
+    debug: true,
+    outputStyle:'extended',
+    prefix:'/css'
+})); //
+
+app.use(express.urlencoded({extended:false})); //extended true for removing deprecateed warning
 app.use(cookieParser());
 
 app.use(express.static('./assets'));//accessing static folder -- assets
@@ -19,14 +35,42 @@ app.use(expressLayouts); // using express ejs layouts
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
-//use express router - always after middle ware , body parser   
-app.use('/',require('./routes'));
+
 
 //set up view engine
 app.set('view engine','ejs');
 app.set('views','./views');
 
 
+//session - now mongo store is use to store to the session cookie
+app.use(session({
+    name:'codeial',
+
+    //todo -- change secret before deployment in production mode
+    secret:'somethingblah',
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:(1000 * 60 * 100) 
+    },
+    store: MongoStore.create(
+    { //now mongo store is use to store to the session cookie
+        mongoUrl : "mongodb://localhost/codeial_development_db",
+        autoRemove: 'disabled'
+    },
+    function(err){
+        console.log(err || 'Mongo store setup is Ok');
+    }
+    )
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
+
+//use express router - always after middle ware , body parser   and templagte engines for working of everything smoothly
+app.use('/',require('./routes'));
 
 
 app.listen(port,function(err){
