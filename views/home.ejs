@@ -1,4 +1,4 @@
-<h1>
+<!-- <h1>
         Codeial <%= title %>
 </h1>
 
@@ -10,18 +10,60 @@
                 <input type="submit" value="Post">
         </form>
 
-<<<<<<< HEAD
         <div id="posts-list-container">
                 <ul>
                         <% for(post of posts){ %>
                                 <li>
                                         <%= post.content %>
+                                        <<small>>
+                                                will reflect user id  =  <%= post.user %>-->
+                                                <!-- <%= post.user %>
+                                        </small>
                                 </li>
                         <% } %>
                 </ul>
 
         </div>
 
-=======
->>>>>>> 4b71530765a7d73c8686c85b50a785e7f403b8ad
-</section>
+</section> -->
+
+
+<h1>
+        Codeial / <%= title %>
+    </h1>
+    
+    
+    <section id="feed-posts">
+        <h4>Posts</h4>
+
+        <!-- showing posts to singed in user - Authentication -->
+        <% if(locals.user) { %>
+
+        <form action="/posts/create" id="new-post-form" method="post">
+            <textarea name="content" cols="30" rows="3" placeholder="Type Here..."></textarea>
+            <input type="submit" value="Post">
+        </form>
+        <% } %>
+
+        <!-- second level of Authentication , so nobody can tamper with inspect element and spam the page , only signed user can post -->
+        
+    
+        <div id="posts-list-container">
+            <ul>
+                <% for(post of posts){ %>
+                    
+                <li>
+                    <p>
+                        <%= post.content %>
+                        <br>
+                        <small>
+                            <%= post.user %>
+                        </small>
+                    </p>
+                    
+                </li>
+                    
+                <%} %>
+            </ul>
+        </div>
+    </section>
