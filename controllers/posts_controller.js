@@ -3,9 +3,9 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 
 module.exports.create = function(req,res){
-    Post.create({
+    Post.create({ // action create -- created -- mapped to routes - post.js
         content: req.body.content, // content = name of textarea name(home.ejs file) like input tag box --
-        user : req.user._id   // user = logged in user
+        user : req.user._id   
     }, function(err,post){
             if(err){
                 console.log('Error in creating a post!!');

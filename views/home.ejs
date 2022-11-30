@@ -18,26 +18,21 @@
 
 <!-- second level of Authentication , so nobody can tamper with inspect element and spam the page , only signed user can post -->
 
-        <!-- <div id="posts-list-container">
+<!-- //displaying posts of related user -->
+       <div id="posts-list-container">
                 <ul>
                         <% for(post of posts){ %>
                         
                         <li>
-                         <p> 
-                                <% if(locals.user && locals.user.id == post.user.id){  %>
-
-                                <small>
-                                        <a href="/posts/destroy/<%= post.id %>">X</a>
-                                </small>
-                                <% } %>
-                        <%= post.content %>
+                                <!-- display post content that is text we enetred in textarea as a post -->
+                         <p> <%= post.content %>  
                         <br>
                         <small>
-                                <!-- if we want signed in user name details to reflect with post 
-                                <%= post.user %>
+                                 <!-- if we want signed in user name details to reflect with post  -->
+                                <%= post.user.name %>
                         </small>
                          </p>
-                        <div class = "post-comment">
+                       <!-- <div class = "post-comment">
                         <% if (locals.user) { %>
                                 <form action="/comments/create" method="POST">
                                         <input type="text" name="content" placeholder="Type here to add comment...." required>
@@ -69,9 +64,9 @@
 
                         </div>
                   
-                </li>
+                </li> -->
                         
                   <% } %>
-                </ul>
-        </div>  -->
+                </ul> 
+        </div>  
 </section>
