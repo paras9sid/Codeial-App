@@ -5,17 +5,18 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    //user autheticated and associate with the posts
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    //include the array of ids of all comments in this post schema itself
+    //include the array of ids of all comments in this post schema itself - post can contain multiple comments
     comments:[
         {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
-    }
-    ],
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ]
 },{
     timestamps: true
 });

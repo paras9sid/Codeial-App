@@ -32,11 +32,21 @@
                                 <%= post.user.name %>
                         </small>
                          </p>
-                       <!-- <div class = "post-comment">
-                        <% if (locals.user) { %>
-                                <form action="/comments/create" method="POST">
+
+                         <!-- form for comments -->
+
+                        <div class = "post-comments">
+
+                                <!-- showing posts to singed in user only after - Authentication (locals = object-->  
+                                <% if(locals.user) { %>
+
+                                <form action="/comments/create" method="post">
+
                                         <input type="text" name="content" placeholder="Type here to add comment...." required>
+
+                                        <!-- value below will be the id of the post -->
                                         <input type="hidden" name="post" value="<%= post._id %>" >
+
                                         <input type="submit" value="Add Comment">
 
                                 </form>        
@@ -64,7 +74,7 @@
 
                         </div>
                   
-                </li> -->
+                </li> 
                         
                   <% } %>
                 </ul> 
