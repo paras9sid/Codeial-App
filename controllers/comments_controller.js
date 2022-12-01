@@ -10,7 +10,7 @@ module.exports.create = function(req,res){
                 user: req.user._id
             },function(err,comment){
                 //handle error - post not found
-                
+                if(err){console.log(err);}
                 post.comments.push(comment);  //comment pushed to the post
                 post.save();  // save tells the db thats it final version - save it
 
