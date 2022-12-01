@@ -11,6 +11,14 @@
     </head>
     <body>
         <%- include('_header'); %>
+
+
+        <!-- flash messages -->
+        <% if(flash.success && flash.success.length > 0){ %>
+            <h5>
+                <%= flash.success %>
+            </h5>
+        <% } %>
         
         <!-- putting body in main tag -- learning SCSS -->
 
