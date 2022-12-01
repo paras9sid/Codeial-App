@@ -9,27 +9,50 @@ module.exports.profile = function(req,res){
     //     title:"Home"
     // });
 
+    //rendering users and friends
+
+    User.findById(req.params.id, function(err,user){
+        
+        return res.render('user_profile',{
+            title: "User Profile",
+            profile_user: user
+        });
+
+    });
+
+
+
     //check if user login cookie is present or not
-    if(req.cookies.user_id){
-        User.findById(req.cookies.user_id,function(err,user){
-            if(err){
-                console.log('user not found!');
-                return;
-            }
-            if(user){
-                return res.render('profile',{
-                    // title:"User Profile",
-                    user:user
-                });
+//     if(req.cookies.user_id){
+//         User.findById(req.cookies.user_id,function(err,user){
+//             if(err){
+//                 console.log('user not found!');
+//                 return;
+//             }
+//             if(user){
+//                 return res.render('profile',{
+//                     // title:"User Profile",
+//                     user:user
+//                 });
 
-            }
-        })
+//             }
+//         })
 
+//     }else{
+//         return res.redirect('/users/login');
+//     }
+
+}
+
+module.exports.update = function(req,res){
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id , req.body,function(err,user){
+            return res.redirect('back');
+        });
     }else{
-        return res.redirect('/users/login');
+        return res.status(401).send('Unathorised');
     }
-
-};
+}
 
 //rendering sign up page
 module.exports.signUp = function(req,res){
@@ -128,7 +151,7 @@ module.exports.createSession = function(req,res){
 module.exports.destroySession = function(req,res){ 
     req.logout(function(err){
         if(err){
-            console.log('Error in sugning out');
+            console.log('Error in signing out');
         }
     });  // inbuilt in passport.js
     return res.redirect('/');

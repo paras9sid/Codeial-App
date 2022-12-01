@@ -4,7 +4,16 @@ const passport = require('passport');
 
 const usersController = require('../controllers/users_controller');
 
-router.get('/profile',passport.checkAuthentication,usersController.profile);
+// router.get('/profile',passport.checkAuthentication,usersController.profile);
+
+//finding all the users and after ejs file section friends making
+//check auth - error will not render user details page after clicking on user name in friends.
+// router.get('/profile/:id',passport.checkAuthentication,usersController.profile); -- check auth will create error
+
+router.get('/profile/:id',usersController.profile);
+router.post('/update/:id',usersController.update);
+
+
 
 router.get('/sign-up',usersController.signUp);
 router.get('/login',usersController.login);
