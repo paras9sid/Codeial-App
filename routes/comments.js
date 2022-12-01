@@ -9,4 +9,6 @@ const commentsController = require('../controllers/comments_controller');
 // checkAuthentication method is used -- authentication method creating problem check again
 router.post('/create',commentsController.create);
 
+router.get('/destroy/:id',commentsController.destory);
+
 module.exports = router;

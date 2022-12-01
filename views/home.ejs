@@ -24,7 +24,16 @@
                         
                         <li>
                                 <!-- display post content that is text we enetred in textarea as a post --> 
-                         <p> <%= post.content %>  
+                         <p>
+                            
+                            <small>
+                                <% if (locals.user && locals.user.id == post.user.id) { %>
+                                <a href="/posts/destroy/<%= post.id%>">X</a>
+
+                            </small>
+                            <% } %>
+                            
+                            <%= post.content %>  
                         <br>
                         <small>
                                  <!-- if we want signed in user name details to reflect with post  -->
@@ -52,6 +61,13 @@
                                     <ul id="post-comments-<%= post._id %>">
                                             <% for (comment of post.comments) { %> 
                                                      <p>
+
+                                                        <small>
+                                                            <% if (locals.user && locals.user.id == comment.user.id) { %>
+                                                            <a href="/comments/destroy/<%= comment.id%>">X</a>
+                            
+                                                        </small>
+                                                        <% } %>
                                                             <%= comment.content %>
                                                             <br>
                                                             <small>

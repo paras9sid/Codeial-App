@@ -13,7 +13,7 @@ const postsController = require('../controllers/posts_controller');
 
 router.post('/create',postsController.create);  // synced with postController  -- authentication method is creating error
 
-// router.get('/destroy/:id',passport.checkAuthentication , postsController.destroy);
+router.get('/destroy/:id', postsController.destroy); // -- authentication method is creating error
 
 
 module.exports = router;

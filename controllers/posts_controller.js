@@ -1,4 +1,3 @@
-const { request } = require('express');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 
@@ -15,22 +14,25 @@ module.exports.create = function(req,res){
         });
 }
 
-// //action for deleting post
+//action for deleting post
 
-// module.exports.destroy = function(req ,res){
+module.exports.destroy = function(req ,res){
     
-//     //finding posts in db
-//     Post.findById(req.params.id , function(err,post){
-//         //post found
-//         //.id = conveting the object id into string -> _id converted to .id by mongoose implicitily
-//         if(post.user == request.user.id){  //
-//             post.remove();
+    //finding posts in db
+    
+    Post.findById(req.params.id , function(err,post){
 
-//             Comment.deleteMany({post:req.params.id},function(err){
-//                 return res.redirect('back');
-//             });
-//         }else{
-//             return res.redirect('back');
-//         }
-//     });
-// }
+        //post found
+        //.id = conveting the object id into string -> _id converted to .id by mongoose implicitily
+
+        if(post.user == req.user.id){  //
+            post.remove();
+
+            Comment.deleteMany({post:req.params.id},function(err){
+                return res.redirect('back');
+            });
+        }else{
+            return res.redirect('back');
+        }
+    });
+}
