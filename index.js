@@ -33,6 +33,10 @@ app.use(express.urlencoded({extended:false})); //extended true for removing depr
 app.use(cookieParser());
 
 app.use(express.static('./assets'));//accessing static folder -- assets
+
+//multer upload file - make the uplaod path availabel to the browser
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
 app.use(expressLayouts); // using express ejs layouts
 
 //extract styles and scripts from subpages into the layouts
