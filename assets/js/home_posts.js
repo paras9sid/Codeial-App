@@ -22,6 +22,7 @@
                     let newPost = newPostDom(data.data.post);
 
                     $('#posts-list-containe>ul').prepend(newPost);
+                    deletePost($(' .delete-post-button', newPost));
 
                 }, error: function(error){
                     console.log(error.responseText);
@@ -76,6 +77,24 @@
             </div>
     
         </li> `)
+    }
+
+    //method to delete a post from dom
+
+    let deletePost = function(deleteLink){
+        ${deleteLink}.click(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success : function(data){
+                    $(`#post-${data.data.post._id}`).remove();
+                }, error : function(error){
+                    console.log(error.responseText);
+                }
+            })
+        })
     }
 
     createPost();
