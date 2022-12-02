@@ -12,5 +12,7 @@ Web App created having :
 8. User details update after signin / friends section done
 9. SCSS improved
 10. Code is converted to async await
+11. AJAX added - sending/receiving data.
+12. Ajax - Delete post added
 
 
