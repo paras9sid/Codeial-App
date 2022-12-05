@@ -13,7 +13,16 @@ module.exports.index = async function(req,res){
         }
     });
 
-    return res.json(200, {
+    //this method below is deprecated by express
+    //express deprecated res.json(status, obj): Use res.status(status).json(obj) instead
+
+    // return res.json(200, {
+    //     message: "List of posts",
+    //     posts: posts
+    // })
+
+    //use this one below instead in comparison to above written method
+    return res.status(200).json({
         message: "List of posts",
         posts: posts
     })
