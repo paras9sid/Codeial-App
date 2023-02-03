@@ -82,7 +82,7 @@
     //method to delete a post from dom
 
     let deletePost = function(deleteLink){
-        ${deleteLink}.click(function(e){
+        $(deleteLink).click(function(e){
             e.preventDefault();
 
             $.ajax({

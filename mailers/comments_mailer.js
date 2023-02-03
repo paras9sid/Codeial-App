@@ -1,11 +1,12 @@
 // comments related mails
 
-import nodemailer from '../config/nodemailer';
+//import nodemailer from '../config/nodemailer';//
+const nodemailer = require('../config/nodemailer');
 
 
 //this is another way of exporting a method - using arow functions
 exports.newComment = (comment) => {
-    console.log('inside newComment mailer');
+    console.log('inside newComment mailer',comment);
 
     nodemailer.transporter.sendMail({
         from : '@gmail.com',

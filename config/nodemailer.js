@@ -4,13 +4,14 @@ const path = require('path');
 const { join } = require('path');
 
 let transporter = nodemailer.createTransport({  // transporter -path which sends email
-    service:'gmail',
-    host:'smtp.gmail.com',   // gmail smtp settings in google search - simple mail transfer protocol
-    port: 587,
-    secure: false,
+    service:'Gmail',
+    // host:'smtp.gmail.com',   // gmail smtp settings in google search - simple mail transfer protocol
+    // port: 587,
+    // secure: true,
     auth: {
+        // type:'login',
         user:'@gmail.com', //gmail id to use
-        password:'$' //password of gmail account we are using
+        pass:'$' //password of gmail account we are using - rename password to pass
     }
 });
 
