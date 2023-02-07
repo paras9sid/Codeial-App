@@ -8,7 +8,7 @@ const likeSchema = new mongoose.Schema({
     //this defines the object id of the like object
     likeable:{
         type: mongoose.Schema.ObjectId,
-        required: type,
+        required: true,
         refPath: 'onModel'
     },
     //this field is used for defining th type of the like object since its dynamic reference
