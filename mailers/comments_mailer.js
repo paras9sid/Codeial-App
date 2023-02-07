@@ -2,6 +2,8 @@
 
 //import nodemailer from '../config/nodemailer';//
 const nodemailer = require('../config/nodemailer');
+require('dotenv').config();
+
 
 
 //this is another way of exporting a method - using arow functions
@@ -9,7 +11,8 @@ exports.newComment = (comment) => {
     console.log('inside newComment mailer',comment);
 
     nodemailer.transporter.sendMail({
-        from : '@gmail.com',
+        // from : '@gmail.com',
+        from: process.env.EMAIL_TO_USE, //dotenv config
         to : comment.user.email,
         subject : 'new comment published',
         body:'<h1>you,your comment is published</h1>',

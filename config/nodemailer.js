@@ -2,16 +2,19 @@ const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
 const { join } = require('path');
+require('dotenv').config();
 
 let transporter = nodemailer.createTransport({  // transporter -path which sends email
     service:'Gmail',
-    // host:'smtp.gmail.com',   // gmail smtp settings in google search - simple mail transfer protocol
-    // port: 587,
-    // secure: true,
+    host:'smtp.gmail.com',   // gmail smtp settings in google search - simple mail transfer protocol
+    port: 587,
+    secure: false,
     auth: {
-        // type:'login',
-        user:'@gmail.com', //gmail id to use
-        pass:'' //password of gmail account we are using - rename password to pass
+        type:'login',
+        // user:'@gmail.com', //gmail id to use
+        // pass:'' //password of gmail account we are using - rename password to pass
+         user:process.env.EMAIL_TO_USE, //dotenv configuration
+         pass:process.env.EMAIL_APP_PSWD
     }
 });
 

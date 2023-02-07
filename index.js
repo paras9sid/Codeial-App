@@ -15,6 +15,8 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportJWT = require('./config/passport-jwt-strategy');
 
+require('dotenv').config();
+
 
 //Error: Unknown authentication strategy "google"
 //if below code doesnt written and imported above error will be reflected in browser/terminal
