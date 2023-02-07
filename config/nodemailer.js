@@ -6,11 +6,11 @@ require('dotenv').config();
 
 let transporter = nodemailer.createTransport({  // transporter -path which sends email
     service:'Gmail',
-    host:'smtp.gmail.com',   // gmail smtp settings in google search - simple mail transfer protocol
-    port: 587,
-    secure: false,
+    // host:'smtp.gmail.com',   // gmail smtp settings in google search - simple mail transfer protocol
+    // port: 587,
+    // secure: false,
     auth: {
-        type:'login',
+        // type:'login',
         // user:'@gmail.com', //gmail id to use
         // pass:'' //password of gmail account we are using - rename password to pass
          user:process.env.EMAIL_TO_USE, //dotenv configuration
