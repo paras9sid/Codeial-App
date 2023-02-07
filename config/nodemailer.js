@@ -11,7 +11,7 @@ let transporter = nodemailer.createTransport({  // transporter -path which sends
     auth: {
         // type:'login',
         user:'@gmail.com', //gmail id to use
-        pass:'$' //password of gmail account we are using - rename password to pass
+        pass:'' //password of gmail account we are using - rename password to pass
     }
 });
 
