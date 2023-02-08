@@ -16,10 +16,13 @@ module.exports.home = async function(req, res){
         .populate('user')
         .populate({
             path:'comments',
-            populate :{
+            populate: {
                 path:'user'
+            },
+            populate: {
+                path: 'likes'
             }
-        });
+        }).populate('likes');
         
                 
         //find all the users
