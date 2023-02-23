@@ -1,10 +1,10 @@
-<li>
+<li id ="post-<%= post._id %>">
     <!-- display post content that is text we enetred in textarea as a post --> 
 <p>
 
 <small>
     <% if (locals.user && locals.user.id == post.user.id) { %>
-    <a href="/posts/destroy/<%= post.id%>">X</a>
+    <a class ="delete-post-button" href="/posts/destroy/<%= post.id%>">X</a>
 
 </small>
 <% } %>
