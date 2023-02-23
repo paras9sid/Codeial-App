@@ -15,4 +15,5 @@ Web App created having :
 11. AJAX added - sending/receiving data.
 12. Ajax - Delete post added
 13. File Upload by Multer - configuration done
+14. JWT passport package isntalled - File created to use.
 
