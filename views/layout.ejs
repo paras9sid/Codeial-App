@@ -3,6 +3,10 @@
 <html>
     <head>
         <title><%= title %></title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/css/layout.css">
         <link rel="stylesheet" href="/css/header.css" >
         <link rel="stylesheet" href="/css/footer.css">
@@ -11,6 +15,16 @@
     </head>
     <body>
         <%- include('_header'); %>
+
+
+        <!-- flash messages  -- commneted for adding noty js flash messages
+        <% if(flash.success && flash.success.length > 0){ %>
+            <h5>
+                <%= flash.success %>
+            </h5>
+        <% } %> -->
+
+
         
         <!-- putting body in main tag -- learning SCSS -->
 
@@ -22,6 +36,33 @@
        <%- include('_footer'); %>
  
        <%- script %>
+
+       <!-- noty js scripts for flash messagas-->
+
+       <script>
+
+            <% if(flash.success && flash.success.length > 0){ %>
+                new Noty({
+                    theme:'relax',
+                    text: '<%= flash.success %>',
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500 
+                }).show();
+            <% } %>
+
+            <% if(flash.error && flash.error.length > 0){ %>
+                new Noty({
+                    theme:'relax',
+                    text: '<%= flash.success %>',
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500 
+                }).show();
+            <% } %>
+
+       </script>
+
        
     </body>
 </html>

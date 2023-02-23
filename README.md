@@ -10,5 +10,7 @@ Web App created having :
 6. Delete comment authorized
 7. User profile link in Friends column synced.
 8. User details update after signin / friends section done
+9. SCSS improved
+10. Code is converted to async await
 
 

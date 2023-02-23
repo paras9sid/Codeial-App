@@ -136,8 +136,8 @@ module.exports.createSession = function(req,res){
 //         }
 //     });
 
-    
-
+    //flash message setup
+    req.flash('success','Logged in successfully!');
   
     // USING PASSPORT MIDDLEWARE AUTHENTICATION
     return res.redirect('/');
@@ -146,12 +146,16 @@ module.exports.createSession = function(req,res){
 };
 
 module.exports.destroySession = function(req,res){ 
-    // req.logout(function(err){
-    //     if(err){
-    //         console.log('Error in signing out');
-    //     }
-    // });  // inbuilt in passport.js
-    req.logout();
+    req.logout(function(err){
+        if(err){
+            console.log('Error in signing out');
+        }
+    });  // inbuilt in passport.js
+    
+
+    //flash message setup
+    req.flash('success', 'Logged out!');
+
     return res.redirect('/');
 
 }
