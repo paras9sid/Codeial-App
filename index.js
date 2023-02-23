@@ -15,6 +15,11 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportJWT = require('./config/passport-jwt-strategy');
 
+
+//Error: Unknown authentication strategy "google"
+//if below code doesnt written and imported above error will be reflected in browser/terminal
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
+
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
 
