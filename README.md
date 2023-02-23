@@ -18,4 +18,3 @@ Web App created having :
 14. JWT passport package isntalled - File created to use.
 
 
-    "node-sass-middleware": "^1.0.1",
