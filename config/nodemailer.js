@@ -2,24 +2,28 @@ const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
 const { join } = require('path');
+require('dotenv').config();
 
-let transporter = nodemailer.createTransport({
-    service:'gmail',
-    host:'smtp.gmail.com',
-    port: 587,
-    secure: false,
+let transporter = nodemailer.createTransport({  // transporter -path which sends email
+    service:'Gmail',
+    // host:'smtp.gmail.com',   // gmail smtp settings in google search - simple mail transfer protocol
+    // port: 587,
+    // secure: false,
     auth: {
-        user:'', //gmail id to use
-        password:'' //password of gmail account we are using
+        // type:'login',
+        // user:'@gmail.com', //gmail id to use
+        // pass:'' //password of gmail account we are using - rename password to pass
+         user:process.env.EMAIL_TO_USE, //dotenv configuration
+         pass:process.env.EMAIL_APP_PSWD
     }
 });
 
 
-let renderTemplate = (data , relativePath) => {
+let renderTemplate = (data , relativePath) => {  // using arrow functions -- renderTemplate - files going fto send in mailers/views folder file
     let mailHTML;
     ejs.renderFile(
         path.join(__dirname, '../views/mailers', relativePath),
-        data,
+        data, // data = context to be passed to ejs
         function(err,template){
             if(err){
                 console.log('error in rendering template',err);
@@ -30,10 +34,10 @@ let renderTemplate = (data , relativePath) => {
         }
     )
 
-    return mailHTML;
+    return mailHTML; 
 }
 
 module.exports = {
-    transporter,
-    renderTemplate
+    transporter, //using shorthand instead of- 
+    renderTemplate  //using shorthand instead of- renderTemplate : renderTemplate
 }
