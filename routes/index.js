@@ -14,6 +14,7 @@ router.use('/users',require('./users')); // for localhost:8001/users/profile
 // router.use('/',require('./users')); // for localhost:8001/profile
 router.use('/posts',require('./posts')); // synced with post routes
 router.use('/comments',require('./comments')); // comments calling
+router.use('/likes',require('./likes'));
 
 
 

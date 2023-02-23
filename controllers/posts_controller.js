@@ -1,42 +1,6 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
-
-// module.exports.create = function(req,res){
-//     Post.create({ // action create -- created -- mapped to routes - post.js
-//         content: req.body.content, // content = name of textarea name(home.ejs file) like input tag box --
-//         user : req.user._id   
-//     }, function(err,post){
-//             if(err){
-//                 console.log('Error in creating a post!!', err);
-//                 return;
-//             }
-//             return res.redirect('back');
-//         });
-// }
-
-// //action for deleting post
-
-// module.exports.destroy = function(req ,res){
-    
-//     //finding posts in db
-    
-//     Post.findById(req.params.id , function(err,post){
-
-//         //post found
-//         //.id = conveting the object id into string -> _id converted to .id by mongoose implicitily
-
-//         if(post.user == req.user.id){  //
-//             post.remove();
-
-//             Comment.deleteMany({post:req.params.id},function(err){
-//                 return res.redirect('back');
-//             });
-//         }else{
-//             return res.redirect('back');
-//         }
-//     });
-// }
-
+const Like = require('../models/like');
 
 // converting into async await - delete callback functions after converting tinto async await
 
@@ -83,6 +47,12 @@ module.exports.destroy = async function(req ,res){
             //.id = conveting the object id into string -> _id converted to .id by mongoose implicitily
     
             if(post.user == req.user.id){  //
+
+                // CHANGE :: delete the associated likes for the post and all its comments likes too
+                await Like.deleteMany({ likeable: post, onModel: 'POST' });
+                await Like.deleteMany({ _id: {$in: post.comments} });
+
+
                 post.remove();
     
                 await Comment.deleteMany({post:req.params.id});
