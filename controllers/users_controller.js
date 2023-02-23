@@ -1,5 +1,7 @@
 const { findOneAndUpdate } = require('../models/user');
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
 
 
 module.exports.profile = function(req,res){
@@ -44,12 +46,51 @@ module.exports.profile = function(req,res){
 
 }
 
-module.exports.update = function(req,res){
+// module.exports.update =  function(req,res){
+//     if(req.user.id == req.params.id){
+//         User.findByIdAndUpdate(req.params.id , req.body,function(err,user){
+//             return res.redirect('back');
+//         });
+//     }else{
+//         return res.status(401).send('Unathorised');
+//     }
+// }
+
+//converting update into async await
+module.exports.update = async function(req,res){
     if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id , req.body,function(err,user){
+        try{
+
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,function(err){
+                if(err){
+                    console.log('******MulterErorr',err);
+                }
+                // console.log(req.file);
+
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                if(req.file){
+
+                    //check if user already have avatar associated with his/her
+                    if(user.avatar){
+                        fs.unlinkSync(path.join(__dirname,'..',user.avatar)); //.. - two steps above
+                    }
+
+                    //this is saving the path of the uploaded file into the avatar field in the User
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+                user.save();
+                return res.redirect('back');
+            });
+
+        }catch(err){
+            req.flash('error',err);
             return res.redirect('back');
-        });
+        }
     }else{
+        req.flash('error','Unauthorized..');
         return res.status(401).send('Unathorised');
     }
 }

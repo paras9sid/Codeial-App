@@ -58,7 +58,7 @@ module.exports.home = async function(req, res){
         // populate the user of each post & query will return all the posts
     
         let posts = await Post.find({})
-        .sort('-createdAt') //ajax deleteing post
+        .sort('-createdAt') //ajax sorting post in order of psoting
         .populate('user')
         .populate({
             path:'comments',

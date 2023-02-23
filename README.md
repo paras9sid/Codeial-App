@@ -11,8 +11,8 @@ Web App created having :
 7. User profile link in Friends column synced.
 8. User details update after signin / friends section done
 9. SCSS improved
-10. Code is converted to async await
+10. Code is converted to async await.
 11. AJAX added - sending/receiving data.
 12. Ajax - Delete post added
-
+13. File Upload by Multer - configuration done
 
