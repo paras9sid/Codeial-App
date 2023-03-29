@@ -16,5 +16,6 @@ Web App created having :
 12. Ajax - Delete post added
 13. File Upload by Multer - configuration done
 14. JWT passport package isntalled - File created to use.
+15. Nodemailer for sending mails to reg email id.
 
 
